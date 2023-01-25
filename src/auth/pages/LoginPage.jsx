@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link as LinkRouter } from "react-router-dom";
-import { Google } from "@mui/icons-material";
+import Google from "@mui/icons-material/Google";
 import {
   Alert,
   Button,
@@ -32,7 +32,6 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
     dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
@@ -44,6 +43,7 @@ export const LoginPage = () => {
   return (
     <AuthLayout title="Login">
       <form
+        aria-label="submit-form"
         className="animate__animated animate__fadeIn animate__faster"
         onSubmit={onSubmit}
       >
@@ -65,6 +65,9 @@ export const LoginPage = () => {
               fullWidth
               sx={{ mt: 2 }}
               name="password"
+              inputProps={{
+                "data-testid": "password",
+              }}
               value={password}
               onChange={onInputChange}
             />
@@ -90,6 +93,7 @@ export const LoginPage = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
+                  aria-label="google-btn"
                   disabled={isAuthenticating}
                   onClick={onGoogleSignIn}
                   variant="contained"
